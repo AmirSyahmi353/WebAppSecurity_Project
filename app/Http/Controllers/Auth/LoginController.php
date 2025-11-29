@@ -8,44 +8,56 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Show login form
+    /**
+     * Show login form.
+     */
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
-    // Handle login
+    /**
+     * Handle login attempt.
+     */
     public function login(Request $request)
     {
+        // Validate login input
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'email'    => 'required|email',
             'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-
-            $user = Auth::user();
-
-            // ✅ ROLE-BASED REDIRECT FIRST
-            if ($user->role === 'admin') {
-                return redirect()->route('admin.dashboard');
-            }
-
-            if ($user->role === 'dietitian') {
-                return redirect()->route('dietitian.dashboard');
-            }
-
-            // ✅ Only PATIENT must fill demographic
-            if ($user->role === 'patient' && !$user->demographic) {
-                return redirect()->route('demographics.create');
-            }
-
-            return redirect()->intended('/home');
+        // Attempt login
+        if (!Auth::attempt($credentials)) {
+            return back()
+                ->withErrors(['email' => 'Invalid email or password.'])
+                ->onlyInput('email');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ])->onlyInput('email');
+        // Regenerate session for security
+        $request->session()->regenerate();
+
+        $user = Auth::user();
+
+        // 🔥 Role-based redirects
+        return $this->redirectByRole($user);
+    }
+
+    /**
+     * Redirect user based on role.
+     */
+    private function redirectByRole($user)
+    {
+        return match ($user->role) {
+
+            'admin'     => redirect()->route('admin.dashboard'),
+            'dietitian' => redirect()->route('dietitian.dashboard'),
+
+            'patient'   => $user->demographic
+                                ? redirect()->route('home')
+                                : redirect()->route('demographics.create'),
+
+            default     => redirect()->route('home'),
+        };
     }
 }
