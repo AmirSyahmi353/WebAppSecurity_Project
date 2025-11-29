@@ -1,0 +1,297 @@
+/* =======================================================
+   MySCAT Main Theme Styles (Landing + Auth Pages)
+   ======================================================= */
+
+/* ---------- Color Variables ---------- */
+:root {
+  --bg-main: #F9F6F3;
+  --bg-light: #F9F6F3;
+  --primary-color: #4FB7B3;
+  --primary-dark: #2F5755;
+  --accent-color: #A1C2BD;
+  --accent-hover: #86B2AA;
+  --white: #FFFFFF;
+  --shadow: rgba(79, 183, 179, 0.3);
+}
+
+/* =======================================================
+   General Page Styling
+   ======================================================= */
+body {
+  background-color: var(--bg-main);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--primary-dark);
+  margin: 0;
+  padding: 0;
+}
+
+/* =======================================================
+   Navbar Styling (Matches Page Background)
+   ======================================================= */
+.navbar {
+  background-color: var(--bg-main) !important; /* same as page bg */
+  padding: 10px 0;
+  border: none;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease, border-radius 0.3s ease;
+}
+
+.navbar:hover {
+  box-shadow: 0 4px 20px var(--shadow);
+  border-radius: 15px;
+}
+
+/* Brand */
+.navbar-brand {
+  color: var(--primary-dark) !important;
+  font-family: "Courier New", monospace;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Navbar links */
+.navbar-nav .nav-link {
+  color: var(--primary-dark) !important;
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  border-radius: 20px;
+  padding: 8px 18px;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--white) !important;
+  background-color: var(--accent-color);
+  box-shadow: 0 0 14px rgba(90, 150, 144, 0.6);
+  border-radius: 25px;
+}
+
+/* Fixed Navbar Behavior */
+#mainNavbar {
+  background-color: #F9F6F3 !important;
+  transition: box-shadow 0.3s ease, border-radius 0.3s ease;
+  padding: 12px 0;
+}
+
+#mainNavbar:hover {
+  box-shadow: 0 4px 20px rgba(79, 183, 179, 0.3);
+  border-radius: 15px;
+}
+
+#mainNavbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =======================================================
+   Login / Profile Button
+   ======================================================= */
+.btn-login {
+  background-color: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-dark);
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  border-radius: 10px;
+  padding: 6px 16px;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+  border-color: var(--accent-color);
+}
+
+/* =======================================================
+   Language Toggle
+   ======================================================= */
+.language-toggle {
+  font-family: "Courier New", monospace;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+.language-toggle .lang-link {
+  color: var(--primary-dark);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.language-toggle .lang-link:hover {
+  color: var(--accent-hover);
+}
+
+.language-toggle .lang-link.active {
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* =======================================================
+   Typewriter Header (Welcome Page)
+   ======================================================= */
+.header-typewriter {
+  font-family: "Courier New", monospace;
+  overflow: hidden;
+  border-right: 2px solid var(--primary-color);
+  white-space: nowrap;
+  color: var(--primary-color);
+  margin: 0;
+  animation: typing 2.5s steps(20, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
+
+/* =======================================================
+   Auth Pages (Login & Register)
+   ======================================================= */
+.auth-body {
+  background-color: var(--bg-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.auth-card {
+  background-color: var(--white);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease;
+}
+
+.auth-card h2 {
+  color: var(--primary-dark);
+  margin-bottom: 30px;
+}
+
+.auth-card input[type="text"],
+.auth-card input[type="email"],
+.auth-card input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.auth-card input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 183, 179, 0.2);
+}
+
+.auth-card button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.auth-card button:hover {
+  background-color: var(--accent-hover);
+}
+
+/* =======================================================
+   Alerts
+   ======================================================= */
+.alert {
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  text-align: left;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.5s ease-in;
+}
+
+.alert-success {
+  background-color: #E6F7EE;
+  color: #2E7D32;
+  border-left: 5px solid #4CAF50;
+}
+
+.alert-error {
+  background-color: #FDECEA;
+  color: #B71C1C;
+  border-left: 5px solid #E57373;
+}
+
+/* =======================================================
+   Animations
+   ======================================================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =======================================================
+   Responsive Adjustments
+   ======================================================= */
+@media (max-width: 768px) {
+  .navbar-nav .nav-link {
+    display: block;
+    margin: 5px 0;
+    text-align: center;
+  }
+
+  .auth-card {
+    padding: 25px;
+  }
+
+  .btn-login {
+    width: 100%;
+  }
+}
+
+/* =======================================================
+   Demographic Card Hover (for profile setup)
+   ======================================================= */
+.demographic-card:hover {
+  transform: translateY(-3px);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================================
+   Demographic Header Typewriter
+   ======================================================= */
+.header-typewriter {
+  font-family: "Courier New", monospace;
+  overflow: hidden;
+  border-right: 2px solid var(--primary-color);
+  white-space: nowrap;
+  color: var(--primary-color);
+  margin: 0 auto 15px auto;
+  display: inline-block;
+  width: 100%; /* ensures animation works */
+  animation: typing 2.5s steps(30, end) forwards, blink 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
+}
