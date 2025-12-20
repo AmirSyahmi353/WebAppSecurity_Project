@@ -84,7 +84,7 @@ class QuestionnaireController extends Controller
             ? "Great! Your sugar craving level is NORMAL 🌸"
             : "Oops! Your sugar craving level is HIGH 😮";
 
-        Result::create([
+        Result::updateOrCreate([
             'user_id'    => auth()->id(),
             'totalScore' => $totalScore,
             'maxScore'   => $maxScore,
