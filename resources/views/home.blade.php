@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
-<section class="home-hero" style="background: url('{{ asset('assets/img/hero/3s.png') }}') no-repeat center/cover;">
-  <div class="container">
-    <div class="hero-inner">
-      <!-- left -->
-      <div class="hero-left">
-        <h1 class="hero-title">
-          Hey <span class="accent">{{ Auth::user()->name ?? 'there' }}</span>, ready to feel better?
-        </h1>
-        <p class="hero-sub">
-          Let’s track your sugar cravings, log your meals, and uncover what your body is trying to tell you — in the sweetest way possible.
-        </p>
-        <a href="{{ route('questionnaire.intro') }}" class="hero-cta">Start Now</a>
+@section('content')
+
+  <section class="hero-section d-flex align-items-center" 
+    style="min-height: 100vh; 
+            background: url('{{ asset('assets/img/hero/3s.png') }}') no-repeat center center/cover;
+            padding-top: 120px;">
+    <div class="container">
+      <div class="hero-inner">
+        <!-- left -->
+        <div class="hero-left">
+          <h1 class="hero-title">
+            Hey <span class="accent">{{ Auth::user()->name ?? 'there' }}</span>, ready to feel better?
+          </h1>
+          <p class="hero-text">
+            Let’s track your sugar cravings, log your meals, and uncover what your body is trying to tell you - in the sweetest way possible.
+          </p>
+          <a href="{{ route('questionnaire.intro') }}" class="hero-cta">Start Now</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="features-section section-bg" >
+  <section class="features-section section-bg" >
   <div class="container">
     <div class="row text-center">
 
@@ -47,7 +52,7 @@
           <img src="{{ asset('assets/img/home/15.png') }}" alt="Result">
           <h3>Results</h3>
           <p>See your progress and personalized recommendations.</p>
-          <a href="{{ route('home') }}" class="btn-feature">View</a>
+          <a href="{{ route('result.show') }}" class="btn-feature">View</a>
         </div>
       </div>
 
@@ -55,7 +60,6 @@
   </div>
 </section>
 
-<!-- About MySCAT Section -->
     <section id="about-myscat" class="about-section py-5">
       <div class="container d-flex align-items-center justify-content-between flex-wrap">
 
@@ -86,3 +90,4 @@
         </div>
       </div>
     </section>
+@endsection

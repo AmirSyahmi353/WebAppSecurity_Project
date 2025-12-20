@@ -18,6 +18,7 @@
 
     {{-- Custom CSS (We move all style here) --}}
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
 
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">

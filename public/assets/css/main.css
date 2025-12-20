@@ -4,6 +4,11 @@
 /* ================================
    MySCAT Header Styling (Clean Reset)
    ================================ */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #FEFAE0;
+}
+
 .main {
   padding: 0; /* remove any auto padding */
   margin: 0;
@@ -415,296 +420,109 @@
 
 
 
-    .home-hero {
-      padding-top: 100px;
-      min-height: 100vh; 
-      display: flex;
-      align-items: center; /* Vertically center content */
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      padding: 100px 0; 
-    }
 
-.hero-inner {
-    display: flex;
-    align-items: center;
-}
+    /* =========================================
+   Questionnaire Intro – MySCAT Theme
+   ========================================= */
 
-.hero-left {
-    max-width: 600px;
-}
-
-.hero-title {
-  font-size: 3rem;
-  font-weight: 700;
-  font-family: 'Fredoka', sans-serif;
-  color: #294544;
-}
-
-.hero-left {
-  backdrop-filter: blur(6px);
-  background: rgba(255, 255, 255, 0.3);
-  padding: 20px;
-  border-radius: 15px;
-}
-
-.hero-title .accent {
-  color: #FF76CE;
-}
-
-.hero-sub {
-  margin-top: 1rem;
-  font-size: 1.15rem;
-  max-width: 550px;
-  font-family: 'Quicksand', sans-serif;
-  line-height: 1.6;
-  color: #355E5C;
-}
-
-/* Button */
-.hero-cta {
-  display: inline-block;
-  margin-top: 1.8rem;
-  background-color: #FF76CE;
-  color: #fff;
-  font-family: 'Fredoka', sans-serif;
-  font-weight: 600;
-  padding: 0.8rem 2.3rem;
-  border-radius: 14px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-.hero-cta:hover {
-  background-color: #ff5bb8;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 118, 206, 0.4);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2.2rem;
-    text-align: center;
-  }
-  .hero-sub {
-    font-size: 1rem;
-    text-align: center;
-  }
-  .home-hero {
-    text-align: center;
-    padding-top: 90px;
-  }
-}
-
-/* Features Section */
-.features-section {
-  padding: 100px 0;
-}
-
-/* Full Background Section */
-.section-bg {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 60px 0;
-}
-
-/* Feature Cards */
-.feature-card {
-  background: rgba(215, 245, 246, 0.85);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-  text-align: center;
-}
-
-.feature-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: contain;
-  margin-bottom: 15px;
-}
-
-/* Title & Text */
-.feature-card h3 {
-  font-size: 1.3rem;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  color: #2F5755;
-}
-
-.feature-card p {
-  font-family: 'Poppins', sans-serif;
-  color: #4F7070;
-  font-size: 0.95rem;
-  margin: 10px 0 20px;
-}
-
-/* Button Style */
-.btn-feature {
-  background-color: #4FB7B3;
-  color: #fff;
-  padding: 10px 25px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: 0.3s ease-in-out;
-}
-
-.btn-feature:hover {
-  background-color: #2F5755;
-}
-
-/* ✅ Responsive for mobile */
-@media (max-width: 768px) {
-  .features-section {
-    padding: 40px 0; /* reduce height */
-  }
-
-  .section-bg {
-    min-height: auto;  /* no need full screen on mobile */
-    padding: 40px 0;
-  }
-
-  .feature-card {
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-
-  .feature-card img {
-    height: 120px; /* smaller image */
-  }
-
-  .feature-card h3 {
-    font-size: 1.1rem;
-  }
-
-  .feature-card p {
-    font-size: 0.85rem;
-  }
-
-  .btn-feature {
-    padding: 8px 18px;
-    font-size: 0.85rem;
-  }
-}
-
-/* About Section Background */
-    .about-section {
-      /* background-image: url('{{ asset('assets/img/hero/about.png') }}');  */
-      background-size: cover;        /* Makes image cover full section */
-      background-position: center top 200px;
-      background-position: center;   /* Centers the image */
-      background-repeat: no-repeat;  /* Prevents tiling */
-      min-height: 100vh;
-      height:auto;                 /* Make it full screen like other sections */
-      color: white;                  /* Text readable on image (optional) */
-    }
-
-    .about-section .container {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        padding-top: 150px; /* 🔹 Push text downward */
-    }
-
-    .about-text h2 {
-        font-size: 2.3rem;
-        font-weight: 700;
-        color: #2F5755;
-        font-family: 'Poppins', serif;
-    }
-
-    .about-desc {
-        font-family: 'Poppins', sans-serif;
-        color: #555;
-        font-size: 1rem;
-        margin-top: 15px;
-        line-height: 1.7;
-    }
-
-    .about-image img {
-        width: 100%;         /* Make it full width of its container */
-        max-width: 1000px;    /* Increase this value to make it bigger */
-        height: auto;        /* Keep the aspect ratio */
-        display: block;
-        margin: 0 auto;      /* Center the image */
-    }
-
-    /* Responsive for mobile */
-    @media (max-width: 768px) {
-        .about-section .container {
-            flex-direction: column;
-            text-align: center;
-        }
-        .about-text, .about-image {
-            margin-bottom: 25px;
-        }
-    }
-    @media (max-width: 768px) {
-    .question-image {
-        max-width: 320px;
-        max-height: 200px;
-    }
-}
-
-    /* Full hero background section */
+/* Full page background */
 .questionnaire-hero {
-    /* background: url('../assets/img/questionnaire/bg.png') no-repeat center/cover; */
-    min-height: 100vh; /* Full viewport height */
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 0;
+    padding: 80px 20px;
+    background-color: #FEFAE0; /* same as landing & auth */
+    font-family: 'Poppins', sans-serif;
 }
 
-/* Center content card */
+/* Card container */
 .questionnaire-box {
-    background: rgba(255, 255, 255, 0.3); /* Light grey with slight transparency */
-    border-radius: 15px;
-    max-width: 800px;
-    width: 90%;
-    padding: 50px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 20px;
+    max-width: 850px;
+    width: 100%;
+    padding: 50px 45px;
+    box-shadow: 0 12px 35px rgba(79, 183, 179, 0.18);
+    text-align: center;
     color: #2F5755;
+    animation: fadeUp 0.6s ease;
 }
 
+/* Heading */
 .questionnaire-box h1 {
-    font-family: 'Poppins', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 700;
     color: #2F5755;
+    margin-bottom: 20px;
 }
 
+/* Paragraph text */
 .questionnaire-box p {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #4F7070;
-    margin-bottom: 15px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 18px;
 }
 
-/* Button styling */
+/* Primary button */
 .questionnaire-box .btn-primary {
     background-color: #4FB7B3;
     border: none;
-    padding: 10px 30px;
+    padding: 12px 38px;
     font-weight: 600;
-    border-radius: 10px;
-    transition: 0.3s ease-in-out;
+    font-size: 1.05rem;
+    border-radius: 12px;
+    transition: all 0.3s ease;
 }
 
 .questionnaire-box .btn-primary:hover {
     background-color: #2F5755;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(47, 87, 85, 0.3);
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .questionnaire-box {
-        padding: 30px;
+/* Smooth entrance animation */
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
+
+/* =========================================
+   Responsive
+   ========================================= */
+
+@media (max-width: 768px) {
+    .questionnaire-box {
+        padding: 35px 25px;
+        border-radius: 18px;
+    }
+
+    .questionnaire-box h1 {
+        font-size: 2rem;
+    }
+
+    .questionnaire-box p {
+        font-size: 0.98rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .questionnaire-box {
+        padding: 30px 20px;
+    }
+
+    .questionnaire-box h1 {
+        font-size: 1.7rem;
+    }
+}
+
 
 /* Page Wrapper */
 .questionnaire-wrapper {
@@ -1042,3 +860,4 @@
     background-color: #3a6d94;
     color: white;
 }
+
