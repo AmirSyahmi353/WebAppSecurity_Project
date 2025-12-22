@@ -84,13 +84,20 @@ class QuestionnaireController extends Controller
             ? "Great! Your sugar craving level is NORMAL 🌸"
             : "Oops! Your sugar craving level is HIGH 😮";
 
-        Result::updateOrCreate([
-            'user_id'    => auth()->id(),
-            'totalScore' => $totalScore,
-            'maxScore'   => $maxScore,
-            'level'      => $level,
-            'answers'    => $answers,
-        ]);
+        Result::updateOrCreate(
+    // 🔑 Condition: identify the patient
+            [
+                'user_id' => auth()->id(),
+            ],
+
+    // ✨ Update with latest questionnaire result
+            [
+                'totalScore' => $totalScore,
+                'maxScore'   => $maxScore,
+                'level'      => $level,
+                'answers'    => $answers,
+            ]
+        );
 
         session()->forget('questionnaire_answers');
 
