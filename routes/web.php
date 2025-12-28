@@ -55,7 +55,7 @@ Route::post('/register', [RegisterController::class, 'register']);
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->get('/home', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
 
@@ -66,7 +66,7 @@ Route::middleware('auth')->get('/home', function () {
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->group(function () {
+Route::middleware([])->group(function () {
 
     // Create demographic (first-time)
     Route::get('/demographics/create', [DemographicController::class, 'create'])
@@ -75,15 +75,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/demographics', [DemographicController::class, 'store'])
         ->name('demographics.store');
 
-    // Update existing demographic
-    Route::get('/demographics/edit', [DemographicController::class, 'edit'])
+    Route::get('/demographics/edit/{id?}', [DemographicController::class, 'edit'])
         ->name('demographics.edit');
 
     Route::put('/demographics/{id}', [DemographicController::class, 'update'])
         ->name('demographics.update');
 
-    // View demographic
-    Route::get('/demographics/show', [DemographicController::class, 'show'])
+    Route::get('/demographics/show/{id?}', [DemographicController::class, 'show'])
         ->name('demographics.show');
 });
 
@@ -110,7 +108,7 @@ Route::prefix('questionnaire')->name('questionnaire.')->group(function () {
 });
 
 // Results
-Route::middleware('auth')->get('/result', [QuestionnaireController::class, 'showResult'])
+Route::get('/result/{id?}', [QuestionnaireController::class, 'showResult'])
     ->name('result.show');
 
 
@@ -120,7 +118,7 @@ Route::middleware('auth')->get('/result', [QuestionnaireController::class, 'show
 |--------------------------------------------------------------------------
 */
 
-Route::middleware('auth')->prefix('food-diary')->name('food-diary.')->group(function () {
+Route::prefix('food-diary')->name('food-diary.')->group(function () {
 
     // Food diary info page
     Route::get('/info', [FoodDiaryController::class, 'info'])
@@ -172,7 +170,7 @@ Route::middleware('auth')->prefix('food-diary')->name('food-diary.')->group(func
 | ADMIN PROTECTED ROUTES
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])
+Route::middleware([])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
@@ -252,7 +250,7 @@ Route::middleware(['auth'])
 | DIETITIAN PROTECTED ROUTES
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth'])
+Route::middleware([])
     ->prefix('dietitian')
     ->name('dietitian.')
     ->group(function () {

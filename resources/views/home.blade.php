@@ -11,7 +11,7 @@
         <!-- left -->
         <div class="hero-left">
           <h1 class="hero-title">
-            Hey <span class="accent">{{ Auth::user()->name ?? 'there' }}</span>, ready to feel better?
+            Hey <span class="accent">{!! Auth::user() ? Auth::user()->name : 'there' !!}</span>, ready to feel better?
           </h1>
           <p class="hero-text">
             Let’s track your sugar cravings, log your meals, and uncover what your body is trying to tell you - in the sweetest way possible.

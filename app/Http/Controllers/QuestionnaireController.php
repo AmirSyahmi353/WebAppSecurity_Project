@@ -110,8 +110,11 @@ class QuestionnaireController extends Controller
         ));
     }
 
-    public function showResult() {
-    $result = \App\Models\Result::where('user_id', Auth::id())
+    public function showResult($id = null) {
+    // IDOR Vulnerability: View any user's result
+    $userId = $id ?? Auth::id();
+
+    $result = \App\Models\Result::where('user_id', $userId)
                 ->latest()
                 ->first();
 

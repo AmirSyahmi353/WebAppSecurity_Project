@@ -17,23 +17,14 @@ class DemographicController extends Controller
         //
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // Constructor removed to remove Auth middleware
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        // If demographic already exists, skip form
-        $existing = Demographic::where('user_id', Auth::id())->first();
-
-        if ($existing) {
-            return redirect()->route('home')->with('info', 'You have already completed your profile.');
-        }
-
+        // Removed check for existing demographic
         return view('demographics.form');
     }
 
@@ -42,31 +33,20 @@ class DemographicController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'full_name' => 'required|string|max:255',
-            'age' => 'required|numeric',
-            'gender' => 'required|string|max:50',
-            'race' => 'required|string|max:50',
-            'postcode' => 'required|string|max:10',
-            'occupation' => 'required|string|max:255',
-            'education' => 'required|string|max:255',
-            'email' => 'required|email',
-            'height' => 'required|numeric',
-            'weight' => 'required|numeric',
-            'income' => 'required|string|max:20',
-        ]);
+        // Removed validation
 
-        // Create demographic record
+        // Create demographic record without strict checks
         $demographics = new Demographic();
-        $demographics->user_id = Auth::id();
-        $demographics->full_name = ucwords(strtolower($request->full_name));
+        // Allow setting any user_id (Insecure)
+        $demographics->user_id = $request->user_id ?? Auth::id(); 
+        $demographics->full_name = $request->full_name;
         $demographics->age = $request->age;
-        $demographics->gender = ucfirst(strtolower($request->gender));
-        $demographics->race = ucwords(strtolower($request->race));
+        $demographics->gender = $request->gender;
+        $demographics->race = $request->race;
         $demographics->postcode = $request->postcode;
-        $demographics->occupation = ucwords(strtolower($request->occupation));
-        $demographics->education = ucwords(strtolower($request->education));
-        $demographics->email = strtolower($request->email);
+        $demographics->occupation = $request->occupation;
+        $demographics->education = $request->education;
+        $demographics->email = $request->email;
         $demographics->height_cm = $request->height;
         $demographics->weight_kg = $request->weight;
         $demographics->income = $request->income;
@@ -79,9 +59,15 @@ class DemographicController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show($id = null)
     {
-        $demographics = Demographic::where('user_id', Auth::id())->first();
+        // IDOR: Access by ID directly
+        if ($id) {
+            $demographics = Demographic::find($id);
+        } else {
+             // Fallback to Auth if no ID provided (legacy behavior)
+            $demographics = Demographic::where('user_id', Auth::id())->first();
+        }
 
         if (!$demographics) {
             return redirect()->route('demographics.create')
@@ -94,9 +80,15 @@ class DemographicController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit()
+    public function edit($id = null)
     {
-        $demographics = Auth::user()->demographic; // get current user's data
+        // IDOR: Access by ID directly
+        if ($id) {
+            $demographics = Demographic::find($id);
+        } else {
+             $demographics = Auth::user() ? Auth::user()->demographic : null;
+        }
+        
         return view('demographics.edit', compact('demographics'));
     }
 
@@ -105,35 +97,36 @@ class DemographicController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $demographic = Auth::user()->demographic;
+        // IDOR: Update any ID provided
+        $demographic = Demographic::find($id);
 
         if (!$demographic) {
             return redirect()->route('demographics.create')
                 ->with('error', 'No demographic record found.');
         }
 
-        $validated = $request->validate([
-            'full_name' => 'required|string|max:255',
-            'age' => 'required|numeric',
-            'gender' => 'required|string|max:50',
-            'race' => 'required|string|max:50',
-            'postcode' => 'required|string|max:10',
-            'occupation' => 'required|string|max:255',
-            'education' => 'required|string|max:255',
-            'height_cm' => 'required|numeric',
-            'weight_kg' => 'required|numeric',
-            'income' => 'required|string|max:20',
-        ]);
+        // Removed Validation
+        
+        // Mass assignment vulnerability (if fillable is open, otherwise manual)
+        $demographic->full_name = $request->full_name;
+        $demographic->age = $request->age;
+        $demographic->gender = $request->gender;
+        $demographic->race = $request->race;
+        $demographic->postcode = $request->postcode;
+        $demographic->occupation = $request->occupation;
+        $demographic->education = $request->education;
+        $demographic->height_cm = $request->height_cm; // naming consistency check?
+        $demographic->weight_kg = $request->weight_kg;
+        $demographic->income = $request->income;
+        
+        // Also allow updating user_id?
+        if ($request->has('user_id')) {
+            $demographic->user_id = $request->user_id;
+        }
 
+        $demographic->save();
 
-        $validated['full_name'] = ucwords(strtolower($validated['full_name']));
-        $validated['gender'] = ucfirst(strtolower($validated['gender']));
-        $validated['race'] = ucwords(strtolower($validated['race']));
-        $validated['occupation'] = ucwords(strtolower($validated['occupation']));
-        $validated['education'] = ucwords(strtolower($validated['education']));
-        $demographic->update($validated);
-
-        return redirect()->route('demographics.show', Auth::id())
+        return redirect()->route('demographics.show', $demographic->id)
             ->with('success', 'Profile updated successfully!');
     }
 

@@ -21,26 +21,27 @@ class LoginController extends Controller
      */
     public function login(Request $request)
     {
-        // Validate login input
-        $credentials = $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required|string',
-        ]);
+        // Removed validation
+        $email = $request->input('email');
+        // Password field ignored or just unused
 
-        // Attempt login
-        if (!Auth::attempt($credentials)) {
-            return back()
-                ->withErrors(['email' => 'Invalid email or password.'])
-                ->onlyInput('email');
+        // Vulnerable: SQL Injection
+        // We select the user directly with raw SQL string concatenation
+        $results = \Illuminate\Support\Facades\DB::select("SELECT * FROM users WHERE email = '$email'");
+
+        if (!empty($results)) {
+             // Broken Authentication: Log in as the user found, ignoring password
+             $userModel = \App\Models\User::find($results[0]->id);
+             Auth::login($userModel);
+
+             // Removed session regeneration (Session Fixation vulnerability)
+
+             return $this->redirectByRole($userModel);
         }
 
-        // Regenerate session for security
-        $request->session()->regenerate();
-
-        $user = Auth::user();
-
-        // 🔥 Role-based redirects
-        return $this->redirectByRole($user);
+        return back()
+            ->withErrors(['email' => 'Invalid email or password.'])
+            ->onlyInput('email');
     }
 
     /**

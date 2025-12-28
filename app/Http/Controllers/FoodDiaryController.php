@@ -28,14 +28,8 @@ class FoodDiaryController extends Controller
     // Save (add/edit) a meal to session
     public function addItem(Request $request, $day)
     {
-        $validated = $request->validate([
-            'meal'    => 'required|string',
-            'time'    => 'required',
-            'food'    => 'required|string',
-            'portion' => 'required|string',
-            'drink'   => 'required|string',
-            'image'   => 'nullable|image|max:2048',
-        ]);
+        // Validation removed
+        $validated = $request->all(); // Mass assignment / unsafe input
 
         // Handle optional image
         if ($request->hasFile('image')) {

@@ -27,7 +27,7 @@
         <div class="row mb-3">
             <div class="col-12 mb-3">
                 <label class="form-label fw-semibold">Full Name</label>
-                <input type="text" class="form-control" value="{{ $demographics->full_name }}" readonly>
+                <input type="text" class="form-control" value="{!! $demographics->full_name !!}" readonly>
             </div>
         </div>
 
@@ -35,11 +35,11 @@
         <div class="row mb-3">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-semibold">Email</label>
-                <input type="text" class="form-control" value="{{ $demographics->email }}" readonly>
+                <input type="text" class="form-control" value="{!! $demographics->email !!}" readonly>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-semibold">Occupation</label>
-                <input type="text" class="form-control" value="{{ $demographics->occupation }}" readonly>
+                <input type="text" class="form-control" value="{!! $demographics->occupation !!}" readonly>
             </div>
         </div>
 
@@ -61,7 +61,7 @@
         <div class="row mb-3">
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-semibold">Education Level</label>
-                <input type="text" class="form-control" value="{{ $demographics->education }}" readonly>
+                <input type="text" class="form-control" value="{!! $demographics->education !!}" readonly>
             </div>
             <div class="col-md-6 mb-3">
                 <label class="form-label fw-semibold">Postcode</label>
